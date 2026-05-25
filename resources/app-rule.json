@@ -1,0 +1,71 @@
+[
+{
+"ruleId" : "RULE_001",
+"description" : "HTTP Listener Port Validation",
+"severity": "MAJOR",
+"nodeSpecification": {
+"nodeReference": "http:listener-connection",
+"xPathNodeReference": false,
+"xPathReturnType": "NODESET",
+"attributeName": "port",
+"attributeValue": "${http.private.port}",
+"attributeOperation": "EQUALS"
+},
+"location": {
+"path": "src/main/mule",
+"inlcudeFileNamePattern": "(.*).xml",
+"excludeFileNamePattern": "pom.xml"
+}
+},
+{
+"ruleId" : "RULE_002",
+"description" : "Standard RAML validation",
+"severity": "MAJOR",
+"ramlRule": {
+"validateTitle" : true,
+"validateDescription" : true,
+"validateDocumentation" : true,
+"validateSecuritySchemes" : true,
+"validateOAuth2Scheme" : true,
+"validateClientIdEnforcementScheme" : true,
+"validateResponseBody" : true,
+"validateRequestBody" : true,
+"validateTraceability" : true,
+"validateErrorResponse" : true
+},
+"location": {
+"path": "src/main/resources/api",
+"inlcudeFileNamePattern": "(.*).raml",
+"excludeFileNamePattern": "pom.xml"
+}
+},
+{
+"ruleId" : "RULE_003",
+"description" : "Check if RAML has baseUri",
+"severity": "MAJOR",
+"ramlRule": {
+"jexlExpression": "obj.servers().get(0).url().value() != null",
+"jexlExpressionMatchingOperation": "==",
+"jexlExpressionExpectedValue": "true"
+},
+"location": {
+"path": "src/main/resources/api",
+"inlcudeFileNamePattern": "(.*).raml",
+"excludeFileNamePattern": "pom.xml"
+}
+},
+{
+"ruleId" : "RULE_022-3",
+"description" : "anypoint.platform.client_id must be declared as secureProperties in mule-artifact.json",
+"severity": "MAJOR",
+"nodeSpecification": {
+"nodeReference": "$.secureProperties",
+"attributeValue": "anypoint.platform.client_secret",
+"attributeOperation": "CONTAINS"
+},
+"location": {
+"path": "",
+"inlcudeFileNamePattern": "mule-artifact.json"
+}
+}
+]
