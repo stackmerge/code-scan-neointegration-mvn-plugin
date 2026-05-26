@@ -21,5 +21,5 @@ jobs:
         cache: maven
         
     - name: Code scan with Maven
-      run: mvn -Bntp clean validate-mule:validate
+      run: mvn -B -ntp clean validate-mule:validate
 
